@@ -28,6 +28,10 @@ namespace FreeCourse.IdentityServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //Aslında claim bazlı bir yetkilendirme yapıyoruz. Kendi oluşturduğumuz endpointleri bu şekilde koruyoruz. ([Authorize(LocalApi.PolicyName)])
+            services.AddLocalApiAuthentication();
+            
+
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -48,6 +52,7 @@ namespace FreeCourse.IdentityServer
                 options.EmitStaticAudienceClaim = true;
             })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiResources(Config.ApiResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
@@ -80,6 +85,9 @@ namespace FreeCourse.IdentityServer
 
             app.UseRouting();
             app.UseIdentityServer();
+            ////////Eklendi.
+            app.UseAuthentication();
+            ////////
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

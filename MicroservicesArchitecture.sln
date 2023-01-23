@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCourse.Services.Catalog
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{139E412A-8BE3-472B-90CD-C4F29835B414}"
 	ProjectSection(SolutionItems) = preProject
+		Notlar.txt = Notlar.txt
 		Ports.txt = Ports.txt
 	EndProjectSection
 EndProject
