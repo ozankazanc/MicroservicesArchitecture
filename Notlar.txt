@@ -1,3 +1,6 @@
 
 IdentityServer4 dokumantasyonu
 https://identityserver4.readthedocs.io/en/latest/
+
+
+API'ler launchSettings->profiles kýsmýnda bulunan 'IIS' deðil, 'Project' commandName'i config'lerini dikkate alarak DOCKER'da ayaða kalkar.

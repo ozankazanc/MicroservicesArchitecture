@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FreeCourse.IdentityServer", "IdentityServer\FreeCourse.IdentityServer\FreeCourse.IdentityServer.csproj", "{BA7D6045-18C7-424A-88AD-80C245B38CEE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhotoStock", "PhotoStock", "{59F895D2-FF20-4E37-823B-FA077B8C4CD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.PhotoStock", "Services\PhotoStock\FreeCourse.Services.PhotoStock\FreeCourse.Services.PhotoStock.csproj", "{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +45,10 @@ Global
 		{BA7D6045-18C7-424A-88AD-80C245B38CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA7D6045-18C7-424A-88AD-80C245B38CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA7D6045-18C7-424A-88AD-80C245B38CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,8 @@ Global
 		{40964006-F110-46DB-8B9E-1A73DA5F7307} = {8C1C3C03-50D5-4C9C-BA93-47F3372BD4C6}
 		{BF8FBECA-9632-4BBB-AC7D-E2D010B02590} = {A7BC65CF-EEBF-493D-B7E1-EBA796013A48}
 		{BA7D6045-18C7-424A-88AD-80C245B38CEE} = {9F0C051F-F8D2-41B4-B95E-F5B163715D4A}
+		{59F895D2-FF20-4E37-823B-FA077B8C4CD2} = {AAD6964E-9761-4910-94DE-4BE5084AAD60}
+		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185} = {59F895D2-FF20-4E37-823B-FA077B8C4CD2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBFCBF28-0B46-4FD8-8767-31BD930ECFE6}

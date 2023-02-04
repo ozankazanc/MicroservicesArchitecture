@@ -1,3 +1,6 @@
 Services
 
+Ports:
 catalogAPI => 5011
+photoStockAPI => 5012
+IdentityServer => 5001
