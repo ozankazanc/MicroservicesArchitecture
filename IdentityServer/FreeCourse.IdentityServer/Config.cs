@@ -4,6 +4,7 @@
 
 using IdentityServer4;
 using IdentityServer4.Models;
+using System;
 using System.Collections.Generic;
 
 namespace FreeCourse.IdentityServer
@@ -21,8 +22,10 @@ namespace FreeCourse.IdentityServer
         public static IEnumerable<IdentityResource> IdentityResources =>
                    new IdentityResource[]
                    {
-                        //new IdentityResources.OpenId(),
-                        //new IdentityResources.Profile(),
+                        new IdentityResources.OpenId(), // mutlaka bu listeye eklenmelidir.
+                        new IdentityResources.Email(),
+                        new IdentityResources.Profile(),
+                        new IdentityResource(){Name = "roles", DisplayName= "Roles",Description = "Kullanıcı Rolleri", UserClaims = new string []{"role"} }
                    };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -45,8 +48,25 @@ namespace FreeCourse.IdentityServer
                     ClientName = "Asp.NET.Core MVC",
                     ClientId = "WebMVCClient",
                     ClientSecrets = {new Secret("secret".Sha256())},
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ClientCredentials, //refresh token yoktur.
                     AllowedScopes = { "catalog_fullpermission", "photo_stock_fullpermission", IdentityServerConstants.LocalApi.ScopeName }
+                },
+                new Client
+                {
+                    ClientName = "Asp.NET.Core MVC",
+                    ClientId = "WebMVCClientForUser",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = {
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess
+                    },
+                    AccessTokenLifetime = 1*60*60, // 1 saat
+                    RefreshTokenExpiration = TokenExpiration.Absolute, // sabit tarih vermek için absolute
+                    AbsoluteRefreshTokenLifetime = (int) (DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds, // 60 gün
+                    RefreshTokenUsage = TokenUsage.ReUse
                 }
 
                 #region kapatıldı.
@@ -80,4 +100,7 @@ namespace FreeCourse.IdentityServer
                 #endregion
             };
     }
+
+
+
 }
