@@ -27,6 +27,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhotoStock", "PhotoStock", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.PhotoStock", "Services\PhotoStock\FreeCourse.Services.PhotoStock\FreeCourse.Services.PhotoStock.csproj", "{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{541053BA-F9C6-48C0-BC55-04F2AB01D946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreeCourse.Services.Basket", "Services\Basket\FreeCourse.Services.Basket\FreeCourse.Services.Basket.csproj", "{2B5E0239-6EBF-4F2D-82A3-AD168C9A6F2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +53,10 @@ Global
 		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B5E0239-6EBF-4F2D-82A3-AD168C9A6F2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B5E0239-6EBF-4F2D-82A3-AD168C9A6F2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B5E0239-6EBF-4F2D-82A3-AD168C9A6F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B5E0239-6EBF-4F2D-82A3-AD168C9A6F2E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +68,8 @@ Global
 		{BA7D6045-18C7-424A-88AD-80C245B38CEE} = {9F0C051F-F8D2-41B4-B95E-F5B163715D4A}
 		{59F895D2-FF20-4E37-823B-FA077B8C4CD2} = {AAD6964E-9761-4910-94DE-4BE5084AAD60}
 		{9DC8A5BA-1FFE-41C1-AC64-3DB3196DF185} = {59F895D2-FF20-4E37-823B-FA077B8C4CD2}
+		{541053BA-F9C6-48C0-BC55-04F2AB01D946} = {AAD6964E-9761-4910-94DE-4BE5084AAD60}
+		{2B5E0239-6EBF-4F2D-82A3-AD168C9A6F2E} = {541053BA-F9C6-48C0-BC55-04F2AB01D946}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FBFCBF28-0B46-4FD8-8767-31BD930ECFE6}
