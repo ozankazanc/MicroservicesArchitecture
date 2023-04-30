@@ -6,3 +6,6 @@ https://identityserver4.readthedocs.io/en/latest/
 API'ler launchSettings->profiles kýsmýnda bulunan 'IIS' deðil, 'Project' commandName'i config'lerini dikkate alarak DOCKER'da ayaða kalkar.
 
 Claim => Kullanýcý hakkýnda tutulan data.
+
+Gateway => Bir clienttan gelen isteði ilgili microservise yönlendiren, yani rootlamaktan sorumlu olan yapýmýz. Arayüzü yoktur.
+		=> Authorization, caching, logging, rate limiting, Load balance iþlemleri burada yapýlabilir.
