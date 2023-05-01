@@ -9,3 +9,11 @@ Claim => Kullanýcý hakkýnda tutulan data.
 
 Gateway => Bir clienttan gelen isteði ilgili microservise yönlendiren, yani rootlamaktan sorumlu olan yapýmýz. Arayüzü yoktur.
 		=> Authorization, caching, logging, rate limiting, Load balance iþlemleri burada yapýlabilir.
+
+------
+ASP.NET CORE MVC
+------
+Cookie içerisinde aþaðýdaki bilgiler tutulacak.
+-> access token
+-> refresh toke
+-> claims 
