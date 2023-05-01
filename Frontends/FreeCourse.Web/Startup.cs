@@ -1,3 +1,4 @@
+using FreeCourse.Shared.Services;
 using FreeCourse.Web.Handler;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services;
@@ -27,19 +28,27 @@ namespace FreeCourse.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddHttpContextAccessor();
-            services.AddHttpClient<IIdentityService, IdentityService>();
+            var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
             services.Configure<ClientSettings>(Configuration.GetSection("ClientSettings"));
             services.Configure<ServiceApiSettings>(Configuration.GetSection("ServiceApiSettings"));
 
-            var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
-            
-          
+            services.AddAccessTokenManagement(); //clientcridentialaccesstokencache için ekliyoruz.
+            services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+            services.AddScoped<ClientCridentialTokenHandler>();
+            services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+
+            services.AddHttpClient<IIdentityService, IdentityService>();
+            services.AddHttpClient<IClientCridentialTokenService, ClientCridentialTokenService>();
             services.AddHttpClient<IUserService, UserService>(opt =>
             {
                 opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
             }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();  //userla alakalý bir istek baþlatýldýðýnda handler çalýþsýn.
-
+            services.AddHttpClient<ICatalogService, CatalogService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");  //http://localhost:5000/Services/catalog
+            }).AddHttpMessageHandler<ClientCridentialTokenHandler>();
 
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
