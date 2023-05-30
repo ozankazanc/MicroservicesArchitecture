@@ -22,7 +22,7 @@ namespace FreeCourse.Web.Services
 
         public async Task<List<CategoryViewModel>> GetAllCategoryAsync()
         {
-            var response = await _client.GetAsync("categories");
+            var response = await _client.GetAsync("categories/GetAll");
             if (!response.IsSuccessStatusCode)
                 return null;
 
@@ -58,7 +58,7 @@ namespace FreeCourse.Web.Services
 
         public async Task<CourseViewModel> GetByCourseIdAsync(string courseId)
         {
-            var response = await _client.GetAsync($"courses/{courseId}");
+            var response = await _client.GetAsync($"courses/GetById/{courseId}");
             if (!response.IsSuccessStatusCode)
                 return null;
 
