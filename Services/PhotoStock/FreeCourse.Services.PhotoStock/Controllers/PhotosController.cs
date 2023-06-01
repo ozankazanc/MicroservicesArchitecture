@@ -22,14 +22,14 @@ namespace FreeCourse.Services.PhotoStock.Controllers
         {
             if (photo != null && photo.Length > 0)
             {
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photo.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\photos", photo.FileName);
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     await photo.CopyToAsync(stream, cancellationToken);
                 }
 
-                var returnPath = "photos/" + photo.FileName;
+                var returnPath = photo.FileName;
 
                 PhotoDto photoDto = new() { Url = returnPath };
 
@@ -40,7 +40,7 @@ namespace FreeCourse.Services.PhotoStock.Controllers
 
         public IActionResult PhotoDelete(string photoUrl)
         {
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photoUrl);
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\photos", photoUrl);
 
             if (!System.IO.File.Exists(path))
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,12 +17,13 @@ namespace FreeCourse.Web.Models.Catalog
         public string Description { get; set; }
         [Display(Name = "Kurs Fiyat")]
         public decimal Price { get; set; }
-        [Display(Name = "Kurs İsmi")]
         public string Picture { get; set; }
         public string UserId { get; set; }
         public FeatureViewModel Feature { get; set; }
         [Display(Name = "Kurs Kategori")]
         [Required]
         public string CategoryId { get; set; }
+        [Display(Name = "Kurs Resim")]
+        public IFormFile PhotoFormFile { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 using FreeCourse.Shared.Services;
 using FreeCourse.Web.Handler;
+using FreeCourse.Web.Helpers;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services;
 using FreeCourse.Web.Services.Interfaces;
@@ -39,6 +40,8 @@ namespace FreeCourse.Web
             services.AddScoped<ClientCridentialTokenHandler>();
             services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
+            services.AddSingleton<PhotoHelper>();
+
             services.AddHttpClient<IIdentityService, IdentityService>();
             services.AddHttpClient<IClientCridentialTokenService, ClientCridentialTokenService>();
             services.AddHttpClient<IUserService, UserService>(opt =>
@@ -49,6 +52,11 @@ namespace FreeCourse.Web
             {
                 opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");  //http://localhost:5000/Services/catalog
             }).AddHttpMessageHandler<ClientCridentialTokenHandler>();
+            services.AddHttpClient<IPhotoStockService, PhotoStockService>(opt =>
+            {
+                opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.PhotoStock.Path}");  //http://localhost:5000/Services/photostock
+            }).AddHttpMessageHandler<ClientCridentialTokenHandler>();
+
 
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
