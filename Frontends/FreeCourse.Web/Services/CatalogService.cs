@@ -42,11 +42,16 @@ namespace FreeCourse.Web.Services
             //baseuri startup tarafından gelir.
             //http://localhost:5000/Services/catalog/courses
 
-            var response = await _client.GetAsync("courses");
+            var response = await _client.GetAsync("courses/GetAll");
             if (!response.IsSuccessStatusCode)
                 return null;
 
             var responseSuccess = await response.Content.ReadFromJsonAsync<Response<List<CourseViewModel>>>();
+
+            responseSuccess.Data.ForEach(x =>
+            {
+                x.StockPictureUrl = _photoHelper.GetPhotoStockUrl(x.Picture);
+            });
 
             return responseSuccess.Data;
         }
@@ -61,7 +66,7 @@ namespace FreeCourse.Web.Services
 
             responseSuccess.Data.ForEach(x =>
             {
-                x.Picture = _photoHelper.GetPhotoStockUrl(x.Picture);
+                x.StockPictureUrl = _photoHelper.GetPhotoStockUrl(x.Picture);
             });
 
             return responseSuccess.Data;
@@ -74,6 +79,8 @@ namespace FreeCourse.Web.Services
                 return null;
 
             var responseSuccess = await response.Content.ReadFromJsonAsync<Response<CourseViewModel>>();
+            
+            responseSuccess.Data.StockPictureUrl = _photoHelper.GetPhotoStockUrl(responseSuccess.Data.Picture);
 
             return responseSuccess.Data;
         }
