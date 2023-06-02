@@ -17,3 +17,8 @@ Cookie içerisinde aþaðýdaki bilgiler tutulacak.
 -> access token
 -> refresh toke
 -> claims 
+
+**projeyi cli ile ayaða kaldýrma:
+*proje üzerinde her deðiþiklik yapýldýðýnda yeniden baþlatýr.
+--> proje yoluna cd ile gidilir.
+--> dotnet watch run komutu yazýlýr.

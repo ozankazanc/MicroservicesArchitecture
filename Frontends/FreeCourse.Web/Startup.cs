@@ -1,9 +1,12 @@
+using FluentValidation.AspNetCore;
 using FreeCourse.Shared.Services;
+using FreeCourse.Web.Extensions;
 using FreeCourse.Web.Handler;
 using FreeCourse.Web.Helpers;
 using FreeCourse.Web.Models;
 using FreeCourse.Web.Services;
 using FreeCourse.Web.Services.Interfaces;
+using FreeCourse.Web.Validators;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,9 +32,8 @@ namespace FreeCourse.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddHttpContextAccessor();
-            var serviceApiSettings = Configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
+            
             services.Configure<ClientSettings>(Configuration.GetSection("ClientSettings"));
             services.Configure<ServiceApiSettings>(Configuration.GetSection("ServiceApiSettings"));
 
@@ -42,21 +44,8 @@ namespace FreeCourse.Web
 
             services.AddSingleton<PhotoHelper>();
 
-            services.AddHttpClient<IIdentityService, IdentityService>();
-            services.AddHttpClient<IClientCridentialTokenService, ClientCridentialTokenService>();
-            services.AddHttpClient<IUserService, UserService>(opt =>
-            {
-                opt.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
-            }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();  //userla alakalý bir istek baþlatýldýðýnda handler çalýþsýn.
-            services.AddHttpClient<ICatalogService, CatalogService>(opt =>
-            {
-                opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");  //http://localhost:5000/Services/catalog
-            }).AddHttpMessageHandler<ClientCridentialTokenHandler>();
-            services.AddHttpClient<IPhotoStockService, PhotoStockService>(opt =>
-            {
-                opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.PhotoStock.Path}");  //http://localhost:5000/Services/photostock
-            }).AddHttpMessageHandler<ClientCridentialTokenHandler>();
-
+            //ServicesExtension'a tasýndi.
+            services.AddHttpClientServices(Configuration);
 
             services
                 .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -69,7 +58,9 @@ namespace FreeCourse.Web
                 });
 
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddFluentValidation(fv=> fv.RegisterValidatorsFromAssemblyContaining<CourseCreateInputValidator>());
+                //Tüm validatorlar RegisterValidatorsFromAssemblyContaining eklenir.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

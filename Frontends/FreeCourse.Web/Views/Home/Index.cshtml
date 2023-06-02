@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
     var count = 0;
 }
-@using FreeCourse.Shared.Extensions;
+
 @model List<CourseViewModel>
 <h2>Kurslar</h2>
 <hr />
@@ -22,9 +22,12 @@
                 <img src="@item.StockPictureUrl" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">@item.Name</h5>
+                    <p class="badge bg-primary">Kategori : @item.Category.Name</p>
                     <p class="card-text">@item.ShortDescription</p>
                     <h4 class="text-primary">@item.Price TL</h4>
-                    <a class="btn btn-success" asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id">Detay</a>
+                    <div>
+                        <a class="btn btn-success" asp-controller="Home" asp-action="Detail" asp-route-id="@item.Id">Detay</a>
+                    </div>
                 </div>
             </div>
         </div>
