@@ -12,7 +12,8 @@ namespace FreeCourse.Web.Models.Basket
         public string CourseName { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; } = 1;
-        private decimal? DiscountAppliedPrice { get; set; }
+
+        private decimal? DiscountAppliedPrice;
         public decimal GetCurrentPrice { get { return DiscountAppliedPrice.IsNotNull() ? DiscountAppliedPrice.Value : Price; } }
         public void AppliedDiscount(decimal disCountPrice)
         {
