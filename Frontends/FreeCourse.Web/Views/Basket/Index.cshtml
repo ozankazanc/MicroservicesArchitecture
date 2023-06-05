@@ -63,7 +63,13 @@
                             <div class="text-danger">İndirim kodu geçersiz.</div>
                         }
                     </form>
+                    <a class="btn btn-success" asp-controller="Order" asp-action="CheckOut">Ödeme Bilgileri</a>
+                    <a class="btn btn-success" asp-controller="Home" asp-action="Index">Kursları incelemeye devam et</a>
                 }
+                else
+            {
+                <div class="alert alert-info">Sepet Boş.</div>
+            }
             </div>
         </div>
     </div>

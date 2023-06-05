@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace FreeCourse.Services.Order.Application.Dtos
+namespace FreeCourse.Web.Models.Order
 {
-    public class OrderDto
+    public class OrderViewModel
     {
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; }
         public string BuyerId { get; set; }
-        public AddressDto Address { get; set; }
-        public List<OrderItemDto> OrderItems { get; set; }
+        public List<OrderItemViewModel> OrderItems { get; set; }
     }
 }
