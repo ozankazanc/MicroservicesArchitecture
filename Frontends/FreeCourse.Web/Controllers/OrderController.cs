@@ -30,17 +30,33 @@ namespace FreeCourse.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CheckOut(CheckOutInfoInput checkOutInfoInput)
         {
+            var orderSuspend = await _orderService.SuspendOrder(checkOutInfoInput);
+            if (!orderSuspend.IsSuccessful)
+            {
+                var basket = await _basketService.Get();
+                ViewBag.basket = basket;
+                ViewBag.error = orderSuspend.Error;
+                return View();
+            }
+            //geriye bir id dönmediğimiz için random orderId atiyoruz.
+            return RedirectToAction(nameof(SuccessfulCheckOut), new { orderId = new Random().Next(1,1000) });
+
+
+            #region Senkron iletişim
+            /*
             var orderStatus = await _orderService.CreateOrder(checkOutInfoInput);
 
-            if (orderStatus.IsSuccessful)
+            if (!orderStatus.IsSuccessful)
             {
                 var basket = await _basketService.Get();
                 ViewBag.basket = basket;
                 ViewBag.error = orderStatus.Error;
-
-                return RedirectToAction(nameof(SuccessfulCheckOut), new { orderId = orderStatus.OrderId });
+                return View();
             }
-            return View();
+            
+            return RedirectToAction(nameof(SuccessfulCheckOut), new { orderId = orderStatus.OrderId });
+            */
+            #endregion
         }
 
         public IActionResult SuccessfulCheckOut(int orderId)

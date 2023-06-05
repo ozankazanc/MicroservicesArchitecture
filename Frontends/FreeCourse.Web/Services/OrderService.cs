@@ -85,9 +85,51 @@ namespace FreeCourse.Web.Services
             return response.Data;
         }
 
-        public Task SuspendOrder(CheckOutInfoInput checkOutInfoInput)
+        public async Task<OrderSuspendViewModel> SuspendOrder(CheckOutInfoInput checkOutInfoInput)
         {
-            throw new NotImplementedException();
+            var basket = await _basketService.Get();
+
+            var orderCreateInput = new OrderCreateInput
+            {
+                BuyerId = _sharedIdentityService.GetUserId,
+                Address = new AddressCreateInput
+                {
+                    District = checkOutInfoInput.Distrinct,
+                    Line = checkOutInfoInput.Line,
+                    Province = checkOutInfoInput.Province,
+                    Street = checkOutInfoInput.Street,
+                    ZipCode = checkOutInfoInput.ZipCode
+                }
+            };
+
+            foreach (var basketItem in basket.BasketItems)
+            {
+                var orderItemCreateInput = new OrderItemCreateInput
+                {
+                    ProductId = basketItem.CourseId,
+                    PictureUrl = string.Empty,
+                    ProductName = basketItem.CourseName,
+                    Price = basketItem.GetCurrentPrice
+                };
+                orderCreateInput.OrderItems.Add(orderItemCreateInput);
+            }
+
+            var paymentInfoInput = new PaymentInfoInput
+            {
+                CardName = checkOutInfoInput.CardName,
+                CardNumber = checkOutInfoInput.CardNumber,
+                Expiration = checkOutInfoInput.Expiration,
+                CVV = checkOutInfoInput.CVV,
+                TotalPrice = basket.TotalPrice,
+                Order = orderCreateInput
+            };
+
+            var responsePayment = await _paymentService.ReceivePayment(paymentInfoInput);
+            if (!responsePayment)
+                return new OrderSuspendViewModel { Error = "Ödeme alınamadı.", IsSuccessful = false };
+
+            await _basketService.Delete();
+            return new OrderSuspendViewModel { IsSuccessful = true };
         }
     }
 }
