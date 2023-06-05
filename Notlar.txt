@@ -9,3 +9,36 @@ Claim => Kullanıcı hakkında tutulan data.
 
 Gateway => Bir clienttan gelen isteği ilgili microservise yönlendiren, yani rootlamaktan sorumlu olan yapımız. Arayüzü yoktur.
 		=> Authorization, caching, logging, rate limiting, Load balance işlemleri burada yapılabilir.
+
+------
+ASP.NET CORE MVC
+------
+Cookie içerisinde aşağıdaki bilgiler tutulacak.
+-> access token
+-> refresh toke
+-> claims 
+
+**projeyi cli ile ayağa kaldırma:
+*proje üzerinde her değişiklik yapıldığında yeniden başlatır.
+--> proje yoluna cd ile gidilir.
+--> dotnet watch run komutu yazılır.
+
+--MassTransit
+-RabbitMQ yu masstransit framework'u ile birlikte kullanılacak.
+-MassTransit distrubuted sistemler için tasarlanmıştır.
+-Hata yönetimi, transaction yönetimi, beklemeye, yeniden denemeye gibi işlemleri kendi üzerinde gerçekleştirebiliyor.
+-Birçok kuyruk sisteminde çalışabiliyor, azure vb. gibi.
+
+-Message Type olarak ikiye ayrılır: Command, Event
+Command => RabbitMQ'ya gönderilen mesajı tek bir servis işleyecekse command,
+Event => RabbitMQ'ya gönderilen mesajı birden fazla farklı servis işleyecekse event.
+Send ifadesi => command gönderimleri için kullanılır. (ISendEndpoint)
+Publish ifadese => event gönderimleri için kullanılır. (IPublishEndpoint)
+
+--RabbitMQ
+6572 portundan default olarak ayağa kalkar.
+16572 portundan UI ayağa kalkar.
+--https://hub.docker.com/_/rabbitmq adresinden güncel versiyon UI ile beraber yüklenebilir.
+
+Yükleme için shell komutu
+=> docker run -d -p 15672:15672 -p 5672:5672 --name rabbitmqcontainer rabbitmq:3.12.0-management

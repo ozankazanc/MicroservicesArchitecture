@@ -27,5 +27,6 @@ namespace FreeCourse.Services.Catalog.Models
         [BsonIgnore]
         public Category Category { get; set; }
 
+       
     }
 }

@@ -34,7 +34,7 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "GatewayAuthenticationScheme",
         "AllowedScopes": [
-          "photostock_fullpermission"
+          "photo_stock_fullpermission"
         ]
       }
     },

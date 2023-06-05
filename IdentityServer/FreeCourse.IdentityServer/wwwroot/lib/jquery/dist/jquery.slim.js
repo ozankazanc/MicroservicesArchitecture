@@ -780,42 +780,43 @@ function Sizzle( selector, context, results, seed ) {
 			if ( nodeType !== 11 && ( match = rquickExpr.exec( selector ) ) ) {
 
 				// ID selector
-				if ( ( m = match[ 1 ] ) ) {
+				if ((m = match[1])) {
 
 					// Document context
-					if ( nodeType === 9 ) {
-						if ( ( elem = context.getElementById( m ) ) ) {
+					if (nodeType === 9) {
+						if ((elem = context.getElementById(m))) {
 
 							// Support: IE, Opera, Webkit
 							// TODO: identify versions
 							// getElementById can match elements by name instead of ID
-							if ( elem.id === m ) {
-								results.push( elem );
+							if (elem.id === m) {
+								results.push(elem);
 								return results;
 							}
 						} else {
 							return results;
 						}
 
-					// Element context
+						// Element context
 					} else {
 
 						// Support: IE, Opera, Webkit
 						// TODO: identify versions
 						// getElementById can match elements by name instead of ID
-						if ( newContext && ( elem = newContext.getElementById( m ) ) &&
-							contains( context, elem ) &&
-							elem.id === m ) {
+						if (newContext && (elem = newContext.getElementById(m)) &&
+							contains(context, elem) &&
+							elem.id === m) {
 
-							results.push( elem );
+							results.push(elem);
 							return results;
 						}
 					}
 
-				// Type selector
-				} else if ( match[ 2 ] ) {
-					push.apply( results, context.getElementsByTagName( selector ) );
+					// Type selector
+				} else if (match[2]) {
+					push.apply(results, context.getElementsByTagName(selector));
 					return results;
+				}
 
 				// Class selector
-				} else if ( ( m = match[ 3 ] ) && support
+			/*	} else if ( ( m = match[ 3 ] ) && support*/

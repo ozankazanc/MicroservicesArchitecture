@@ -20,7 +20,7 @@ namespace FreeCourse.Services.Catalog.Controllers
         {
             _categoryService = categoryService;
         }
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
             var response = await _categoryService.GetAllAsync();

@@ -1111,28 +1111,29 @@
     ;
 
     Carousel._jQueryInterface = function _jQueryInterface(config) {
-      return this.each(function () {
-        var data = $(this).data(DATA_KEY$2);
+        return this.each(function () {
+            var data = $(this).data(DATA_KEY$2);
 
-        var _config = _objectSpread2({}, Default, {}, $(this).data());
+            var _config = _objectSpread2({}, Default, {}, $(this).data());
 
-        if (typeof config === 'object') {
-          _config = _objectSpread2({}, _config, {}, config);
+            if (typeof config === 'object') {
+                _config = _objectSpread2({}, _config, {}, config);
+            }
+
+            var action = typeof config === 'string' ? config : _config.slide;
+
+            if (!data) {
+                data = new Carousel(this, _config);
+                $(this).data(DATA_KEY$2, data);
+            }
         }
 
-        var action = typeof config === 'string' ? config : _config.slide;
+        //if (typeof config === 'number') {
+        //  data.to(config);
+        //} else if (typeof action === 'string') {
+        //  if (typeof data[action] === 'undefined') {
+        //    throw new TypeError("No method named \"" + action + "\"");
+        //  }
 
-        if (!data) {
-          data = new Carousel(this, _config);
-          $(this).data(DATA_KEY$2, data);
-        }
-
-        if (typeof config === 'number') {
-          data.to(config);
-        } else if (typeof action === 'string') {
-          if (typeof data[action] === 'undefined') {
-            throw new TypeError("No method named \"" + action + "\"");
-          }
-
-          data[action]();
-        } else if (_config.interval && _config.
+        //  data[action]();
+        //} else if (_config.interval && _config.
