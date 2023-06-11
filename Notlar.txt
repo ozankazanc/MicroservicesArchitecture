@@ -3,66 +3,79 @@ IdentityServer4 dokumantasyonu
 https://identityserver4.readthedocs.io/en/latest/
 
 
-API'ler launchSettings->profiles kısmında bulunan 'IIS' değil, 'Project' commandName'i config'lerini dikkate alarak DOCKER'da ayağa kalkar.
+API'ler launchSettings->profiles kï¿½smï¿½nda bulunan 'IIS' deï¿½il, 'Project' commandName'i config'lerini dikkate alarak DOCKER'da ayaï¿½a kalkar.
 
-Claim => Kullanıcı hakkında tutulan data.
+Claim => Kullanï¿½cï¿½ hakkï¿½nda tutulan data.
 
-Gateway => Bir clienttan gelen isteği ilgili microservise yönlendiren, yani rootlamaktan sorumlu olan yapımız. Arayüzü yoktur.
-		=> Authorization, caching, logging, rate limiting, Load balance işlemleri burada yapılabilir.
+Gateway => Bir clienttan gelen isteï¿½i ilgili microservise yï¿½nlendiren, yani rootlamaktan sorumlu olan yapï¿½mï¿½z. Arayï¿½zï¿½ yoktur.
+		=> Authorization, caching, logging, rate limiting, Load balance iï¿½lemleri burada yapï¿½labilir.
 
 ********************************************************
 ASP.NET CORE MVC
 ------
-Cookie içerisinde aşağıdaki bilgiler tutulacak.
+Cookie iï¿½erisinde aï¿½aï¿½ï¿½daki bilgiler tutulacak.
 -> access token
 -> refresh toke
 -> claims 
 
-**projeyi cli ile ayağa kaldırma:
-*proje üzerinde her değişiklik yapıldığında yeniden başlatır.
+**projeyi cli ile ayaï¿½a kaldï¿½rma:
+*proje ï¿½zerinde her deï¿½iï¿½iklik yapï¿½ldï¿½ï¿½ï¿½nda yeniden baï¿½latï¿½r.
 --> proje yoluna cd ile gidilir.
---> dotnet watch run komutu yazılır.
+--> dotnet watch run komutu yazï¿½lï¿½r.
 
 ***************************************************
 MassTransit
 -----------
--RabbitMQ yu masstransit framework'u ile birlikte kullanılacak.
--MassTransit distrubuted sistemler için tasarlanmıştır.
--Hata yönetimi, transaction yönetimi, beklemeye, yeniden denemeye gibi işlemleri kendi üzerinde gerçekleştirebiliyor.
--Birçok kuyruk sisteminde çalışabiliyor, azure vb. gibi.
+-RabbitMQ yu masstransit framework'u ile birlikte kullanï¿½lacak.
+-MassTransit distrubuted sistemler iï¿½in tasarlanmï¿½ï¿½tï¿½r.
+-Hata yï¿½netimi, transaction yï¿½netimi, beklemeye, yeniden denemeye gibi iï¿½lemleri kendi ï¿½zerinde gerï¿½ekleï¿½tirebiliyor.
+-Birï¿½ok kuyruk sisteminde ï¿½alï¿½ï¿½abiliyor, azure vb. gibi.
 
--Message Type olarak ikiye ayrılır: Command, Event
-Command => RabbitMQ'ya gönderilen mesajı tek bir servis işleyecekse command,
-Event => RabbitMQ'ya gönderilen mesajı birden fazla farklı servis işleyecekse event.
-Send ifadesi => command gönderimleri için kullanılır. (ISendEndpoint)
-Publish ifadese => event gönderimleri için kullanılır. (IPublishEndpoint)
+-Message Type olarak ikiye ayrï¿½lï¿½r: Command, Event
+Command => RabbitMQ'ya gï¿½nderilen mesajï¿½ tek bir servis iï¿½leyecekse command,
+Event => RabbitMQ'ya gï¿½nderilen mesajï¿½ birden fazla farklï¿½ servis iï¿½leyecekse event.
+Send ifadesi => command gï¿½nderimleri iï¿½in kullanï¿½lï¿½r. (ISendEndpoint)
+Publish ifadese => event gï¿½nderimleri iï¿½in kullanï¿½lï¿½r. (IPublishEndpoint)
 
 RabbitMQ
 --------
-6572 portundan default olarak ayağa kalkar.
-16572 portundan UI ayağa kalkar.
---https://hub.docker.com/_/rabbitmq adresinden güncel versiyon UI ile beraber yüklenebilir.
+6572 portundan default olarak ayaï¿½a kalkar.
+16572 portundan UI ayaï¿½a kalkar.
+--https://hub.docker.com/_/rabbitmq adresinden gï¿½ncel versiyon UI ile beraber yï¿½klenebilir.
 
-Yükleme için shell komutu
+Yï¿½kleme iï¿½in shell komutu
 => docker run -d -p 15672:15672 -p 5672:5672 --name rabbitmqcontainer rabbitmq:3.12.0-management
 ****************************************************
 
 Eventual Consistency
 --------------------
-İki veritabanı arasındaki tutarlığı sağlamak için bu dizaynı kullanıyoruz.
-Örneğin iki adet veritabanımız var ve bu veritabanlarının örnek bir tablosunda aynı amaca hizmet eden alanlar bulunmakta.
-İki veritabanın birinde, herhangi bir tablodaki alanın değeri değişir ve diğer veritabanındaki tabloda bulunan alanın değeri de değişmek zorundaysa bu yapıyı kullanıyoruz.
-RabbitMQ ile sağlayacağız, event fırlatılacak.
+ï¿½ki veritabanï¿½ arasï¿½ndaki tutarlï¿½ï¿½ï¿½ saï¿½lamak iï¿½in bu dizaynï¿½ kullanï¿½yoruz.
+ï¿½rneï¿½in iki adet veritabanï¿½mï¿½z var ve bu veritabanlarï¿½nï¿½n ï¿½rnek bir tablosunda aynï¿½ amaca hizmet eden alanlar bulunmakta.
+ï¿½ki veritabanï¿½n birinde, herhangi bir tablodaki alanï¿½n deï¿½eri deï¿½iï¿½ir ve diï¿½er veritabanï¿½ndaki tabloda bulunan alanï¿½n deï¿½eri de deï¿½iï¿½mek zorundaysa bu yapï¿½yï¿½ kullanï¿½yoruz.
+RabbitMQ ile saï¿½layacaï¿½ï¿½z, event fï¿½rlatï¿½lacak.
 
 *******************************************************
 
 Token Exchange
 -------------- 
-Güvenlik anlamında bize yardımcı olur. Normalde kullanıcı email password'la dolaylı yoldan 4 servise istek yapabilir. 
-Ancak token exchange ile beraber 2 servisle kısıtlanacak. Bu iki servis direk diğer iki servise erişmek yerine Identity serverden token exhange edilerek bağlantı kuracak.
-Böylelikle eğer token ele geçirilirse maksimum 2 servise erişim sağlayabilir olacak.
+Gï¿½venlik anlamï¿½nda bize yardï¿½mcï¿½ olur. Normalde kullanï¿½cï¿½ email password'la dolaylï¿½ yoldan 4 servise istek yapabilir. 
+Ancak token exchange ile beraber 2 servisle kï¿½sï¿½tlanacak. Bu iki servis direk diï¿½er iki servise eriï¿½mek yerine Identity serverden token exhange edilerek baï¿½lantï¿½ kuracak.
+Bï¿½ylelikle eï¿½er token ele geï¿½irilirse maksimum 2 servise eriï¿½im saï¿½layabilir olacak.
 
-İşlem nasıl gerçekleşecek;
+ï¿½ï¿½lem nasï¿½l gerï¿½ekleï¿½ecek;
 
-Asp.net Core mvc (son kullanıcı) veya bir mikroservis fakepaymenta ve ya discounta istek yapmak istediğinde ocelot katmanı bunu anlasın,
-eldeki tokeni identity server'a göndersin ve elde etmiş olduğu tokenla  fakepaymenta ve ya discounta istek yapsın.
+Asp.net Core mvc (son kullanï¿½cï¿½) veya bir mikroservis fakepaymenta ve ya discounta istek yapmak istediï¿½inde ocelot katmanï¿½ bunu anlasï¿½n,
+eldeki tokeni identity server'a gï¿½ndersin ve elde etmiï¿½ olduï¿½u tokenla  fakepaymenta ve ya discounta istek yapsï¿½n.
+
+
+*****************************************************
+Docker Compose
+--------------
+
+Volume nedir?
+
+Container silinse dahi iÃ§erisinde bulunan Ã¶rneÄŸin sql server datasÄ± silinmez. Bu yÃ¼zden Ã¶nemlidir. 
+
+--komutlar
+docker compese up => bÃ¼tÃ¼n containerlarÄ± ayaÄŸa kaldÄ±rÄ±r.
+
