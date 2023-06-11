@@ -53,3 +53,16 @@ Eventual Consistency
 Örneðin iki adet veritabanýmýz var ve bu veritabanlarýnýn örnek bir tablosunda ayný amaca hizmet eden alanlar bulunmakta.
 Ýki veritabanýn birinde, herhangi bir tablodaki alanýn deðeri deðiþir ve diðer veritabanýndaki tabloda bulunan alanýn deðeri de deðiþmek zorundaysa bu yapýyý kullanýyoruz.
 RabbitMQ ile saðlayacaðýz, event fýrlatýlacak.
+
+*******************************************************
+
+Token Exchange
+-------------- 
+Güvenlik anlamýnda bize yardýmcý olur. Normalde kullanýcý email password'la dolaylý yoldan 4 servise istek yapabilir. 
+Ancak token exchange ile beraber 2 servisle kýsýtlanacak. Bu iki servis direk diðer iki servise eriþmek yerine Identity serverden token exhange edilerek baðlantý kuracak.
+Böylelikle eðer token ele geçirilirse maksimum 2 servise eriþim saðlayabilir olacak.
+
+Ýþlem nasýl gerçekleþecek;
+
+Asp.net Core mvc (son kullanýcý) veya bir mikroservis fakepaymenta ve ya discounta istek yapmak istediðinde ocelot katmaný bunu anlasýn,
+eldeki tokeni identity server'a göndersin ve elde etmiþ olduðu tokenla  fakepaymenta ve ya discounta istek yapsýn.

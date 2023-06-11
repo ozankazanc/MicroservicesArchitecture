@@ -65,11 +65,23 @@ namespace FreeCourse.IdentityServer
                     ClientId = "WebMVCClient",
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials, //refresh token yoktur.
-                    AllowedScopes = { 
-                        "catalog_fullpermission", 
-                        "photo_stock_fullpermission", 
+                    AllowedScopes = {
+                        "catalog_fullpermission",
+                        "photo_stock_fullpermission",
                         "gateway_fullpermission",
                         IdentityServerConstants.LocalApi.ScopeName}
+                },
+                new Client
+                {
+                    ClientName = "Token Exchange Client",
+                    ClientId = "TokenExchangeClient",
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    AllowedGrantTypes = new List<string> {"urn:ietf:params:oauth:grant-type:token-exchange" },
+                    AllowedScopes = {
+                        "discount_fullpermission",
+                        "payment_fullpermission",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                      }
                 },
                 new Client
                 {
@@ -86,9 +98,9 @@ namespace FreeCourse.IdentityServer
                         IdentityServerConstants.StandardScopes.OfflineAccess,
                         "roles",
                         "basket_fullpermission",
-                        "discount_fullpermission",
+                        //"discount_fullpermission", token exchange ile taşındı.
                         "order_fullpermission",
-                        "payment_fullpermission",
+                        //"payment_fullpermission", token exchange ile taşındı.
                         "gateway_fullpermission"
                     },
                     AccessTokenLifetime = 1*60*60, // 1 saat

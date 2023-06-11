@@ -60,6 +60,7 @@ namespace FreeCourse.IdentityServer
 
             //Kullanici bazli token alabilmek için servis eklendi.
             builder.AddResourceOwnerValidator<IdentityResourcesOwnerPasswordValidator>();
+            builder.AddExtensionGrantValidator<TokenExchangeExtensionGrantValidator>();
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
