@@ -10,7 +10,7 @@ Claim => Kullanýcý hakkýnda tutulan data.
 Gateway => Bir clienttan gelen isteði ilgili microservise yönlendiren, yani rootlamaktan sorumlu olan yapýmýz. Arayüzü yoktur.
 		=> Authorization, caching, logging, rate limiting, Load balance iþlemleri burada yapýlabilir.
 
-------
+********************************************************
 ASP.NET CORE MVC
 ------
 Cookie içerisinde aþaðýdaki bilgiler tutulacak.
@@ -23,7 +23,9 @@ Cookie içerisinde aþaðýdaki bilgiler tutulacak.
 --> proje yoluna cd ile gidilir.
 --> dotnet watch run komutu yazýlýr.
 
---MassTransit
+***************************************************
+MassTransit
+-----------
 -RabbitMQ yu masstransit framework'u ile birlikte kullanýlacak.
 -MassTransit distrubuted sistemler için tasarlanmýþtýr.
 -Hata yönetimi, transaction yönetimi, beklemeye, yeniden denemeye gibi iþlemleri kendi üzerinde gerçekleþtirebiliyor.
@@ -35,10 +37,19 @@ Event => RabbitMQ'ya gönderilen mesajý birden fazla farklý servis iþleyecekse ev
 Send ifadesi => command gönderimleri için kullanýlýr. (ISendEndpoint)
 Publish ifadese => event gönderimleri için kullanýlýr. (IPublishEndpoint)
 
---RabbitMQ
+RabbitMQ
+--------
 6572 portundan default olarak ayaða kalkar.
 16572 portundan UI ayaða kalkar.
 --https://hub.docker.com/_/rabbitmq adresinden güncel versiyon UI ile beraber yüklenebilir.
 
 Yükleme için shell komutu
 => docker run -d -p 15672:15672 -p 5672:5672 --name rabbitmqcontainer rabbitmq:3.12.0-management
+****************************************************
+
+Eventual Consistency
+--------------------
+Ýki veritabaný arasýndaki tutarlýðý saðlamak için bu dizayný kullanýyoruz.
+Örneðin iki adet veritabanýmýz var ve bu veritabanlarýnýn örnek bir tablosunda ayný amaca hizmet eden alanlar bulunmakta.
+Ýki veritabanýn birinde, herhangi bir tablodaki alanýn deðeri deðiþir ve diðer veritabanýndaki tabloda bulunan alanýn deðeri de deðiþmek zorundaysa bu yapýyý kullanýyoruz.
+RabbitMQ ile saðlayacaðýz, event fýrlatýlacak.
